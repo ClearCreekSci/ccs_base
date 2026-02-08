@@ -81,90 +81,101 @@ def getName(ID):
     return rv
 
 def getValue(ID,v,metric):
-    rv = '' 
-    n = float(v)
-    if ID == CCS_AIR_TEMPERATURE_UUID:
+
+    print('[getValue] ID: ' + str(ID) + ', v: ' + str(v))
+
+    if CCS_AIR_TEMPERATURE_UUID == ID:
+        n = float(v)
         if False == metric:
             n *= C_TO_F_CONVERSION
             n += 32
         rv = '{:.{}f}'.format(n,2)
-    elif ID == CCS_HUMIDITY_UUID:
+    elif CCS_HUMIDITY_UUID == ID:
+        n = float(v)
         rv = '{:.{}f}'.format(n,2)
-    elif ID == CCS_AIR_PRESSURE_UUID:
+    elif CCS_AIR_PRESSURE_UUID == ID:
+        n = float(v)
         if False == metric:
             n *= IN_HG_CONVERSION 
         rv = '{:.{}f}'.format(n,2)
-    elif ID == CCS_WIND_SPEED_UUID:
+    elif CCS_WIND_SPEED_UUID == ID:
+        n = float(v)
         if False == metric:
             n *= 2.235936
         rv = '{:.{}f}'.format(n,2)
-    elif ID == CCS_WIND_DIRECTION_UUID:
+    elif CCS_WIND_DIRECTION_UUID == ID:
+        n = float(v)
         rv = '{:.{}f}'.format(n,2)
-    elif ID == CCS_PRECIPITATION_UUID:
+    elif CCS_PRECIPITATION_UUID == ID:
+        n = float(v)
         if False == metric:
             n *= MM_TO_IN_CONVERSION 
         rv = '{:.{}f}'.format(n,2)
-    elif ID == CCS_WATER_TEMPERATURE_UUID:
+    elif CCS_WATER_TEMPERATURE_UUID == ID:
+        n = float(v)
         if False == metric:
             n *= C_TO_F_CONVERSION
             n += 32
         rv = '{:.{}f}'.format(n,2)
-    elif ID == CCS_WATER_VELOCITY_UUID:
+    elif CCS_WATER_VELOCITY_UUID == ID:
+        n = float(v)
         if False == metric:
             n *= MS_TO_MPH_CONVERSION 
         rv = '{:.{}f}'.format(n,2)
-    elif ID == CCS_WATER_LEVEL_UUID:
+    elif CCS_WATER_LEVEL_UUID == ID:
+        n = float(v)
         if False == metric:
             n *= M_TO_IN_CONVERSION 
         rv = '{:.{}f}'.format(n,2)
-    elif CCS_TURBIDITY_UUID:
+    elif CCS_TURBIDITY_UUID == ID:
+        n = float(v)
         rv = '{:.{}f}'.format(n,2)
     else:
-        rv = '{:.{}f}'.format(n,2)
+        rv = v 
     return rv
 
 def getUnits(ID,metric):
     rv = '' 
-    if ID == CCS_AIR_TEMPERATURE_UUID:
+    if CCS_AIR_TEMPERATURE_UUID == ID:
         if metric:
             rv = '°C'
         else:
             rv = '°F'
-    elif ID == CCS_HUMIDITY_UUID:
+    elif CCS_HUMIDITY_UUID == ID:
         rv = '%'
-    elif ID == CCS_AIR_PRESSURE_UUID:
+    elif CCS_AIR_PRESSURE_UUID == ID:
         if metric:
             rv = 'hPa'
         else:
             rv = 'inHg'
-    elif ID == CCS_WIND_SPEED_UUID:
+    elif CCS_WIND_SPEED_UUID == ID:
         if metric:
             rv = 'm/s'
         else:
             rv = 'mph'
-    elif ID == CCS_WIND_DIRECTION_UUID:
+    elif CCS_WIND_DIRECTION_UUID == ID:
         rv = '°'
-    elif ID == CCS_PRECIPITATION_UUID:
+    elif CCS_PRECIPITATION_UUID == ID:
         if metric:
             rv = 'mm'
         else:
             rv = 'in'
-    elif ID == CCS_WATER_TEMPERATURE_UUID:
+    elif CCS_WATER_TEMPERATURE_UUID == ID:
         if metric:
             rv = '°C'
         else:
             rv = '°F'
-    elif ID == CCS_WATER_VELOCITY_UUID:
+    elif CCS_WATER_VELOCITY_UUID == ID:
         if metric:
             rv = 'm/s'
         else:
             rv = 'mph'
-    elif ID == CCS_WATER_LEVEL_UUID:
+    elif CCS_WATER_LEVEL_UUID == ID:
         if metric:
             rv = 'mm'
         else:
             rv = 'in'
-    elif CCS_TURBIDITY_UUID:
+    elif CCS_TURBIDITY_UUID == ID:
             rv = 'NTU'
     return rv
 
