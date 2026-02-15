@@ -81,9 +81,6 @@ def getName(ID):
     return rv
 
 def getValue(ID,v,metric):
-
-    print('[getValue] ID: ' + str(ID) + ', v: ' + str(v))
-
     if CCS_AIR_TEMPERATURE_UUID == ID:
         n = float(v)
         if False == metric:
