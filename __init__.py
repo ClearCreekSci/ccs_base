@@ -24,6 +24,8 @@ CCS_DBUS_BLE_ADVERT_UUID     = 'a0ce0100-3bbf-11ee-89eb-00e04c400cc5'
 CCS_DBUS_BLE_AGENT_UUID      = 'a0ce0101-3bbf-11ee-89eb-00e04c400cc5'
 # Clear Creek Scientific Device Label
 CCS_DEVICE_LABEL_UUID        = 'a0ce0120-3bbf-11ee-89eb-00e04c400cc5'
+# UTC Timestamp 
+CCS_UTC_TIMESTAMP_UUID       = 'a0ce0130-3bbf-11ee-89eb-00e04c400cc5'
 # Clear Creek Scientific Data Service
 CCS_DATA_SERVICE_UUID        = 'a0ce0200-3bbf-11ee-89eb-00e04c400cc5'
 # Station ID (UTF-8 string, 1-8 characters)
@@ -53,17 +55,18 @@ CCS_TURBIDITY_UUID           = 'a0ce0219-3bbf-11ee-89eb-00e04c400cc5'
 CCS_PHOTOGRAPH_UUID          = 'a0ce0300-3bbf-11ee-89eb-00e04c400cc5'
 
 labels = {
+    CCS_AIR_PRESSURE_UUID:'Air Pressure',
     CCS_AIR_TEMPERATURE_UUID:'Air Temperature',
     CCS_HUMIDITY_UUID:'Relative Humidity',
-    CCS_AIR_PRESSURE_UUID:'Air Pressure',
-    CCS_WIND_SPEED_UUID :'Wind Speed',
-    CCS_WIND_DIRECTION_UUID :'Wind Direction',
+    CCS_PHOTOGRAPH_UUID:'Photograph',
     CCS_PRECIPITATION_UUID :'Precipitation',
+    CCS_TURBIDITY_UUID :'Turbidity',
+    CCS_UTC_TIMESTAMP_UUID : 'Timestamp (UTC)',
+    CCS_WATER_LEVEL_UUID :'Water Level',
     CCS_WATER_TEMPERATURE_UUID :'Water Temperature',
     CCS_WATER_VELOCITY_UUID :'Water Velocity',
-    CCS_WATER_LEVEL_UUID :'Water Level',
-    CCS_TURBIDITY_UUID :'Turbidity',
-    CCS_PHOTOGRAPH_UUID:'Photograph',
+    CCS_WIND_DIRECTION_UUID :'Wind Direction',
+    CCS_WIND_SPEED_UUID :'Wind Speed'
 }
 
 UNKNOWN = 'Unknown'
@@ -81,6 +84,7 @@ def getName(ID):
     return rv
 
 def getValue(ID,v,metric):
+    rv = ''
     if CCS_AIR_TEMPERATURE_UUID == ID:
         n = float(v)
         if False == metric:
@@ -173,6 +177,6 @@ def getUnits(ID,metric):
         else:
             rv = 'in'
     elif CCS_TURBIDITY_UUID == ID:
-            rv = 'NTU'
+        rv = 'NTU'
     return rv
 
