@@ -74,18 +74,14 @@ labels = {
     CCS_WATER_LEVEL_UUID :'Water Level',
     CCS_WATER_TEMPERATURE_UUID :'Water Temperature',
     CCS_WATER_VELOCITY_UUID :'Water Velocity',
-<<<<<<< HEAD
     CCS_WATER_LEVEL_UUID :'Water Level',
     CCS_TURBIDITY_UUID :'Turbidity',
+    CCS_WIND_SPEED_UUID :'Wind Speed'
+    CCS_WIND_DIRECTION_UUID :'Wind Direction',
     CCS_PHOTOGRAPH_UUID:'Photograph',
     CCS_CPU_TEMPERATURE_UUID:'CPU Temperature',
     CCS_GPU_TEMPERATURE_UUID:'GPU Temperature',
-    CCS_GPU_TEMPERATURE_UUID:'GPU Temperature',
     CCS_PI_THROTTLED_STATUS_UUID:'Pi Throttled Status',
-=======
-    CCS_WIND_DIRECTION_UUID :'Wind Direction',
-    CCS_WIND_SPEED_UUID :'Wind Speed'
->>>>>>> refs/remotes/origin/main
 }
 
 UNKNOWN = 'Unknown'
