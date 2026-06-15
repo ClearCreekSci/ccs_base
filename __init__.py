@@ -76,7 +76,7 @@ labels = {
     CCS_WATER_VELOCITY_UUID :'Water Velocity',
     CCS_WATER_LEVEL_UUID :'Water Level',
     CCS_TURBIDITY_UUID :'Turbidity',
-    CCS_WIND_SPEED_UUID :'Wind Speed'
+    CCS_WIND_SPEED_UUID :'Wind Speed',
     CCS_WIND_DIRECTION_UUID :'Wind Direction',
     CCS_PHOTOGRAPH_UUID:'Photograph',
     CCS_CPU_TEMPERATURE_UUID:'CPU Temperature',
