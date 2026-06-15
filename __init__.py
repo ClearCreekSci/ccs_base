@@ -24,6 +24,8 @@ CCS_DBUS_BLE_ADVERT_UUID     = 'a0ce0100-3bbf-11ee-89eb-00e04c400cc5'
 CCS_DBUS_BLE_AGENT_UUID      = 'a0ce0101-3bbf-11ee-89eb-00e04c400cc5'
 # Clear Creek Scientific Device Label
 CCS_DEVICE_LABEL_UUID        = 'a0ce0120-3bbf-11ee-89eb-00e04c400cc5'
+# UTC Timestamp 
+CCS_UTC_TIMESTAMP_UUID       = 'a0ce0130-3bbf-11ee-89eb-00e04c400cc5'
 # Clear Creek Scientific Data Service
 CCS_DATA_SERVICE_UUID        = 'a0ce0200-3bbf-11ee-89eb-00e04c400cc5'
 # Station ID (UTF-8 string, 1-8 characters)
@@ -62,14 +64,17 @@ CCS_GPU_TEMPERATURE_UUID = 'a0ce0401-3bbf-11ee-89eb-00e04c400cc5'
 CCS_PI_THROTTLED_STATUS_UUID = 'a0ce04a0-3bbf-11ee-89eb-00e04c400cc5'
 
 labels = {
+    CCS_AIR_PRESSURE_UUID:'Air Pressure',
     CCS_AIR_TEMPERATURE_UUID:'Air Temperature',
     CCS_HUMIDITY_UUID:'Relative Humidity',
-    CCS_AIR_PRESSURE_UUID:'Air Pressure',
-    CCS_WIND_SPEED_UUID :'Wind Speed',
-    CCS_WIND_DIRECTION_UUID :'Wind Direction',
+    CCS_PHOTOGRAPH_UUID:'Photograph',
     CCS_PRECIPITATION_UUID :'Precipitation',
+    CCS_TURBIDITY_UUID :'Turbidity',
+    CCS_UTC_TIMESTAMP_UUID : 'Timestamp (UTC)',
+    CCS_WATER_LEVEL_UUID :'Water Level',
     CCS_WATER_TEMPERATURE_UUID :'Water Temperature',
     CCS_WATER_VELOCITY_UUID :'Water Velocity',
+<<<<<<< HEAD
     CCS_WATER_LEVEL_UUID :'Water Level',
     CCS_TURBIDITY_UUID :'Turbidity',
     CCS_PHOTOGRAPH_UUID:'Photograph',
@@ -77,6 +82,10 @@ labels = {
     CCS_GPU_TEMPERATURE_UUID:'GPU Temperature',
     CCS_GPU_TEMPERATURE_UUID:'GPU Temperature',
     CCS_PI_THROTTLED_STATUS_UUID:'Pi Throttled Status',
+=======
+    CCS_WIND_DIRECTION_UUID :'Wind Direction',
+    CCS_WIND_SPEED_UUID :'Wind Speed'
+>>>>>>> refs/remotes/origin/main
 }
 
 UNKNOWN = 'Unknown'
@@ -102,6 +111,7 @@ def getTemperatureValue(ID,v,metric):
     return rv
 
 def getValue(ID,v,metric):
+    rv = ''
     if CCS_AIR_TEMPERATURE_UUID == ID:
         rv = getTemperatureValue(ID,v,metric)
     elif CCS_HUMIDITY_UUID == ID:
@@ -156,7 +166,6 @@ def getTemperatureUnits(ID,metric):
     return rv
 
 def getUnits(ID,metric):
-    rv = '' 
     if CCS_AIR_TEMPERATURE_UUID == ID:
         rv = getTemperatureUnits(ID,metric)
     elif CCS_HUMIDITY_UUID == ID:
@@ -192,9 +201,11 @@ def getUnits(ID,metric):
             rv = 'in'
     elif CCS_TURBIDITY_UUID == ID:
             rv = 'NTU'
-    if CCS_CPU_TEMPERATURE_UUID == ID:
+    elif CCS_CPU_TEMPERATURE_UUID == ID:
         rv = getTemperatureUnits(ID,metric)
-    if CCS_GPU_TEMPERATURE_UUID == ID:
+    elif CCS_GPU_TEMPERATURE_UUID == ID:
         rv = getTemperatureUnits(ID,metric)
+    else:
+        rv = ''
     return rv
 
