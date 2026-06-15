@@ -49,8 +49,17 @@ CCS_WATER_LEVEL_UUID         = 'a0ce0218-3bbf-11ee-89eb-00e04c400cc5'
 # Turbidity (NTU)
 CCS_TURBIDITY_UUID           = 'a0ce0219-3bbf-11ee-89eb-00e04c400cc5'
 
-#    Photograph (path to saved graphics file) (Characteristic):
+# Photograph (path to saved graphics file) (Characteristic):
 CCS_PHOTOGRAPH_UUID          = 'a0ce0300-3bbf-11ee-89eb-00e04c400cc5'
+
+# CPU Temperature (Celsius)
+CCS_CPU_TEMPERATURE_UUID = 'a0ce0400-3bbf-11ee-89eb-00e04c400cc5'
+# GPU Temperature (Celsius)
+CCS_GPU_TEMPERATURE_UUID = 'a0ce0401-3bbf-11ee-89eb-00e04c400cc5'
+
+
+# Raspberry Pi Throttle Status
+CCS_PI_THROTTLED_STATUS_UUID = 'a0ce04a0-3bbf-11ee-89eb-00e04c400cc5'
 
 labels = {
     CCS_AIR_TEMPERATURE_UUID:'Air Temperature',
@@ -64,6 +73,10 @@ labels = {
     CCS_WATER_LEVEL_UUID :'Water Level',
     CCS_TURBIDITY_UUID :'Turbidity',
     CCS_PHOTOGRAPH_UUID:'Photograph',
+    CCS_CPU_TEMPERATURE_UUID:'CPU Temperature',
+    CCS_GPU_TEMPERATURE_UUID:'GPU Temperature',
+    CCS_GPU_TEMPERATURE_UUID:'GPU Temperature',
+    CCS_PI_THROTTLED_STATUS_UUID:'Pi Throttled Status',
 }
 
 UNKNOWN = 'Unknown'
@@ -80,13 +93,17 @@ def getName(ID):
         rv = labels[ID]
     return rv
 
+def getTemperatureValue(ID,v,metric):
+    n = float(v)
+    if False == metric:
+        n *= C_TO_F_CONVERSION
+        n += 32
+    rv = '{:.{}f}'.format(n,2)
+    return rv
+
 def getValue(ID,v,metric):
     if CCS_AIR_TEMPERATURE_UUID == ID:
-        n = float(v)
-        if False == metric:
-            n *= C_TO_F_CONVERSION
-            n += 32
-        rv = '{:.{}f}'.format(n,2)
+        rv = getTemperatureValue(ID,v,metric)
     elif CCS_HUMIDITY_UUID == ID:
         n = float(v)
         rv = '{:.{}f}'.format(n,2)
@@ -109,11 +126,7 @@ def getValue(ID,v,metric):
             n *= MM_TO_IN_CONVERSION 
         rv = '{:.{}f}'.format(n,2)
     elif CCS_WATER_TEMPERATURE_UUID == ID:
-        n = float(v)
-        if False == metric:
-            n *= C_TO_F_CONVERSION
-            n += 32
-        rv = '{:.{}f}'.format(n,2)
+        rv = getTemperatureValue(ID,v,metric)
     elif CCS_WATER_VELOCITY_UUID == ID:
         n = float(v)
         if False == metric:
@@ -127,17 +140,25 @@ def getValue(ID,v,metric):
     elif CCS_TURBIDITY_UUID == ID:
         n = float(v)
         rv = '{:.{}f}'.format(n,2)
+    elif CCS_CPU_TEMPERATURE_UUID == ID:
+        rv = getTemperatureValue(ID,v,metric)
+    elif CCS_GPU_TEMPERATURE_UUID == ID:
+        rv = getTemperatureValue(ID,v,metric)
     else:
         rv = v 
+    return rv
+
+def getTemperatureUnits(ID,metric):
+    if metric:
+        rv = '°C'
+    else:
+        rv = '°F'
     return rv
 
 def getUnits(ID,metric):
     rv = '' 
     if CCS_AIR_TEMPERATURE_UUID == ID:
-        if metric:
-            rv = '°C'
-        else:
-            rv = '°F'
+        rv = getTemperatureUnits(ID,metric)
     elif CCS_HUMIDITY_UUID == ID:
         rv = '%'
     elif CCS_AIR_PRESSURE_UUID == ID:
@@ -158,10 +179,7 @@ def getUnits(ID,metric):
         else:
             rv = 'in'
     elif CCS_WATER_TEMPERATURE_UUID == ID:
-        if metric:
-            rv = '°C'
-        else:
-            rv = '°F'
+        rv = getTemperatureUnits(ID,metric)
     elif CCS_WATER_VELOCITY_UUID == ID:
         if metric:
             rv = 'm/s'
@@ -174,5 +192,9 @@ def getUnits(ID,metric):
             rv = 'in'
     elif CCS_TURBIDITY_UUID == ID:
             rv = 'NTU'
+    if CCS_CPU_TEMPERATURE_UUID == ID:
+        rv = getTemperatureUnits(ID,metric)
+    if CCS_GPU_TEMPERATURE_UUID == ID:
+        rv = getTemperatureUnits(ID,metric)
     return rv
 
